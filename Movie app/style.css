@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #22254b;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+#page {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 3fr 1fr;;
+    grid-column-gap: 20px;
+    grid-template-areas:
+        "head head head"
+        "nav main aside";
+}
+
+#page > header {
+    grid-area: head;
+    max-width: 100vw;
+}
+
+#page > main{
+    grid-area: main;
+    max-width: 100vw;
+}
+
+#page > .navigation{
+    grid-area: nav;
+    max-width: 100vw;
+}
+
+#page > aside{
+    grid-area: aside;
+    max-width: 100vw;
+}
+
+
+/* Header */
+
+.header{
+    background-color: #373b69;
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    width: 45px;
+    height: 45px;
+    user-select: none;
+}
+
+.th{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+}
+
+.thumbnail-images{
+    border: 1px solid red;
+    background-color: antiquewhite;
+    overflow: hidden;
+    position: relative;
+}
+
+.thumb-img{
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+}
+
+.search{
+    padding: 10px 25px;
+    border-radius: 50px;
+    background-color: transparent;
+    border: 2px solid #22254b;
+    font-weight: 700;
+    color: #fff;
+    font-family: inherit;
+}
+
+.search::placeholder{
+    color: #fff;
+}
+
+.search:focus{
+    outline: none;
+    background-color: #22254b;
+}
+
+
+/* Navigation */
+
+.navigation{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.genre{
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.genre img{
+    width: 40px;
+    height: 40px;
+}
+
+.genre.selected {
+    background-color: #0056b3; 
+}
+
+.genre:hover{
+    color: pink;
+    text-decoration: underline;
+}
+
+
+/* Main */
+
+.movie{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    perspective: 1000px;
+}
+
+.movie img{
+    max-width: 100%;
+}
+
+.movie-tile{
+    background-color: #373b69;
+    position: relative;
+    width: 100%;
+    min-height: 500px; 
+    transform-style: preserve-3d;
+    transition: transform 0.3s linear;
+}
+
+.movie-tile.flip{
+    transform: rotateY(180deg);
+}
+
+.movie-front, .movie-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+}
+
+.movie-front{
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.movie-back{
+    transform: rotateY(180deg);
+    color: #fff;
+    background-color: #373b69;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow .5s ease-in-out;
+    /* animation: glow 1s ease-in-out infinite alternate; */
+    box-shadow: 0 0 25px 10px rgba(153, 102, 255, 0.8);
+}
+
+/* @keyframes glow {
+    from {
+        box-shadow: none;
+    }
+    to {
+        box-shadow: 0 0 20px, 0 0 30px #d966ff, 0 0 40px #d966ff;
+    }
+} */
+
+.overView{
+    padding-bottom: 30px;
+}
+
+.overView::selection{
+    background-color: navy;
+}
+
+.buttonMovie{
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.buttonMovie::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: green;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.buttonMovie:hover::before{
+    width: 100%;
+}
+
+.buttonMovie a{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+}
+
+.movie-front h3, .movie-front span, .movie-front small{
+    margin: 5px 0;
+}
+
+.movie-info{
+    color: #fff;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+.rating{
+    color: #fff;
+    padding: 0.2em 0.4em;
+    border-radius: 0.3em;
+}
+
+.good-rating{
+    background-color: green;
+}
+
+.average-rating{
+    background-color: orange;
+}
+
+.bad-rating{
+    background-color: red;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pages{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+
+
+.pages.selected {
+    background-color: #007BFF;
+    color: white;
+}
+
+.pages .dots {
+    pointer-events: none;
+}
+
+/* Aside */
+
+.aside{
+    background-color: blue;
+}
+
+
+@media (max-width: 1256px) {
+    #page {
+        grid-template-areas:
+          "head"
+          "main";
+        grid-template-columns: 1fr;
+    }
+
+    #page > .navigation,
+    #page > aside {
+        display: none;
+    }
+}
