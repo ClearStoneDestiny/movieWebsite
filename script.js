@@ -11,35 +11,49 @@ const mainDiv = document.querySelector('.movie');
 const form = document.querySelector('#form');
 const search = document.querySelector('.search');
 const logo = document.querySelector('.logo');
+const leftArrow = document.querySelector('.left');
+const rightArrow = document.querySelector('.right');
+let currentPage = 1;
+let totalPages = 0;
+let currentSearchTerm = '';
+let currentGenreId = '';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupPagination();
     setupGenres();
 });
 
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    currentSearchTerm = search.value;
+    currentGenreId = '';
+    if (currentSearchTerm) {
+        resetPagination();
+        getMovies(SEARCHAPI + currentSearchTerm + "&page=1");
+        search.value = '';
+    }
+});
 
-
-function setupPagination() {
-    const pages = document.querySelectorAll('.pages');
-    const selectedPageId = 1;
-
-    pages.forEach(page => {
-        if (page.dataset.pageId === selectedPageId.toString()) {
-            page.classList.add('selected');
-        }
-    });
-
-    pages.forEach(page => {
-        page.addEventListener('click', function() {
-            pages.forEach(g => g.classList.remove('selected'));
-            this.classList.add('selected');
-            getMoviesByPageAndGenre(localStorage.getItem('selectedGenreId') || "", this.dataset.pageId);
-        });
-    });
-
-    // Load initial page
-    getMoviesByPageAndGenre(localStorage.getItem('selectedGenreId') || "", selectedPageId);
+function setupPagination(apiUrl) {
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            totalPages = data.total_pages;
+            $('#pagination-container').pagination({
+                dataSource: Array(totalPages).fill().map((_, i) => i + 1),
+                pageSize: 1,
+                callback: function(data, pagination) {
+                    if (currentSearchTerm) {
+                        getMovies(SEARCHAPI + currentSearchTerm + "&page=" + pagination.pageNumber);
+                    } else if (currentGenreId) {
+                        getMoviesByPageAndGenre(currentGenreId, pagination.pageNumber);
+                    } else {
+                        getMovies(PAGEAPI + pagination.pageNumber);
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching movies:', error));
 }
 
 function setupGenres() {
@@ -49,6 +63,7 @@ function setupGenres() {
     genres.forEach(genre => {
         if (genre.dataset.genreId === selectedGenreId) {
             genre.classList.add('selected');
+            currentGenreId = selectedGenreId;
         }
     });
 
@@ -57,26 +72,27 @@ function setupGenres() {
             genres.forEach(g => g.classList.remove('selected'));
             this.classList.add('selected');
             localStorage.setItem('selectedGenreId', this.dataset.genreId);
+            currentGenreId = this.dataset.genreId;
+            currentSearchTerm = '';
 
-            // Set the page to 1 when a new genre is selected
             resetPagination();
             getMoviesByPageAndGenre(this.dataset.genreId, 1);
         });
     });
 
-    // Load initial genre
     if (selectedGenreId) {
         getMoviesByPageAndGenre(selectedGenreId, 1);
+    } else {
+        setupPagination(APIURL);
     }
 }
 
 function resetPagination() {
-    const pages = document.querySelectorAll('.pages');
-    pages.forEach(g => g.classList.remove('selected'));
-
-    // Highlight the first page
-    pages[0].classList.add('selected');
+    currentPage = 1;
+    const apiUrl = currentSearchTerm ? SEARCHAPI + currentSearchTerm + "&page=1" : (currentGenreId ? GENRESAPI + currentGenreId + "&page=1" : APIURL);
+    setupPagination(apiUrl);
 }
+
 
 function getMoviesByPageAndGenre(genreId, pageId) {
     let apiUrl;
@@ -96,7 +112,7 @@ function getMovies(apiUrl) {
         .then(data => {
             mainDiv.innerHTML = '';
             data.results.forEach(movie => {
-                console.log(movie);
+                // console.log(movie);
                 createMovieTile(movie)
             });
         })
@@ -106,26 +122,12 @@ function getMovies(apiUrl) {
 getMovies(APIURL);
 
 
-// async function getMovies(url){
-//     const resp = await fetch(url);
-//     const respDate = await resp.json();
-    
-//     // console.log(respDate);
-//     mainDiv.innerHTML = '';
-//     respDate.results.forEach(movie => {
-//         console.log(movie);
-//         createMovieTile(movie)
-//     });
-    
-//     return respDate;
-// }
-
-
 function createMovieTile(movie){
     const img = document.createElement('img');
     img.src = IMGPATH + movie.poster_path;
+    img.alt = movie.title;
 
-    console.log(movie.genre_ids[0]);
+    // console.log(movie.genre_ids[0]);
 
     const title = document.createElement('h3');
     title.innerText = movie.title;
@@ -245,31 +247,6 @@ form.addEventListener('submit', function(e){
         search.value = '';
     }
 });
-
-// document.querySelectorAll('.genre').forEach(() => {
-//     const genres = document.querySelectorAll('.genre');
-//     const selectedGenreId = localStorage.getItem('selectedGenreId');
-
-//     if (selectedGenreId) {
-//         genres.forEach(genre => {
-//             if (genre.dataset.genreId === selectedGenreId) {
-//                 genre.classList.add('selected');
-//                 getMovies(GENRESAPI + selectedGenreId);
-//             }
-//         });
-//     }
-
-//     genres.forEach(genre => {
-//         genre.addEventListener('click', function() {
-//             genres.forEach(g => g.classList.remove('selected'));
-
-//             this.classList.add('selected');
-
-//             localStorage.setItem('selectedGenreId', this.dataset.genreId);
-//             getMovies(GENRESAPI + this.dataset.genreId);
-//         });
-//     });
-// });
 
 logo.addEventListener('click', function(){
     localStorage.removeItem('selectedGenreId');
