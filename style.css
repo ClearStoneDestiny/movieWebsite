@@ -143,7 +143,8 @@ body{
 
 .movie{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     padding: 20px;
     max-width: 1000px;
@@ -159,7 +160,8 @@ body{
     background-color: #373b69;
     position: relative;
     width: 100%;
-    min-height: 500px; 
+    /* min-height: 500px;  */
+    min-height: 600px;
     transform-style: preserve-3d;
     transition: transform 0.3s linear;
 }
@@ -257,6 +259,7 @@ body{
     color: #fff;
     padding: 0.2em 0.4em;
     border-radius: 0.3em;
+    text-align: center;
 }
 
 .good-rating{
@@ -341,6 +344,19 @@ body{
     #page > aside {
         display: none;
     }
+}
+
+@media (max-width: 800px) {
+    .movie-tile{
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    .movie {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+    }
+ 
 }
 
 

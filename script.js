@@ -131,6 +131,7 @@ function createMovieTile(movie){
 
     const title = document.createElement('h3');
     title.innerText = movie.title;
+    cutTitle(title);
 
     const voteAverage = document.createElement('span');
     voteAverage.classList.add('rating');
@@ -226,6 +227,18 @@ function changeDate(releaseDate){
     dateElement.textContent = formattedDate;
 
     return dateElement;
+}
+
+function cutTitle(text){
+    console.log(text.innerText);
+    let titleText = text.innerText;
+    if(titleText.length > 50){
+        text.style.fontSize = '14px'
+    }
+    else if(titleText.length > 25){
+        text.style.fontSize = '16px'
+    }
+
 }
 
 function cutOverView(text){
