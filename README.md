@@ -1,2 +1,3 @@
 # movieWebsite
-That's not a final version, design looks kind rough, but it's in a progress, currently working on dynamic page appearing in pagination and user cabinet, with sign in/out
+Implemented dynamic pagination, displaying films by popularity, with a memory effect of the selected genre. There is also a movie search by title and auto update of the movie library
+Creative thinking on adding new features
