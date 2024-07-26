@@ -1,0 +1,85 @@
+.movie-tile{
+    background-color: #373b69;
+    position: relative;
+    width: 100%;
+    /* min-height: 500px;  */
+    min-height: 600px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s linear;
+}
+
+.movie-tile.flip{
+    transform: rotateY(180deg);
+}
+
+.movie-front, .movie-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+}
+
+.movie-front{
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.movie-back{
+    transform: rotateY(180deg);
+    color: #fff;
+    background-color: #373b69;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow .5s ease-in-out;
+    box-shadow: 0 0 25px 10px rgba(153, 102, 255, 0.8);
+}
+
+.overView{
+    padding-bottom: 30px;
+}
+
+.overView::selection{
+    background-color: navy;
+}
+
+.buttonMovie{
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.buttonMovie::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: green;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.buttonMovie:hover::before{
+    width: 100%;
+}
+
+.buttonMovie a{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+}

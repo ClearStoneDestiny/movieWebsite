@@ -10,6 +10,10 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+
     <link rel="stylesheet" href="style.css">
     <title>Movie app</title>
 </head>
@@ -21,108 +25,199 @@
             <form id="form">
                 <input type="text" class="search" id="search" placeholder="Search">
             </form>
+            <img class="menu" src="./icons/burger-menu.svg" alt="Menu">
+            <div class="menu-elements animate__animated">
+                <form id="form">
+                    <input type="text" class="menu-search" id="search" placeholder="Search">
+                    <img class="searchIcon" src="./icons/search.svg" alt="search">
+                </form>
+                <nav class="navigation">
+                    <div class="filters"></div>
+                    <div class="genres">
+                        <div class="genre" data-genre-id="28">
+                            Action
+                            <img src="./icons/action.svg" alt="Action">
+                        </div>
+                        <div class="genre" data-genre-id="12">
+                            Adventure
+                            <img src="./icons/adventure.png" alt="Adventure">
+                        </div>
+                        <div class="genre" data-genre-id="16">
+                            Animation
+                            <img src="./icons/animation.svg" alt="Animation">
+                        </div>
+                        <div class="genre" data-genre-id="35">
+                            Comedy
+                            <img src="./icons/comedy.png" alt="Comedy">
+                        </div>
+                        <div class="genre" data-genre-id="80">
+                            Crime
+                            <img src="./icons/crime.png" alt="Crime">
+                        </div>
+                        <div class="genre" data-genre-id="99">
+                            Documentary
+                            <img src="./icons/documentary.png" alt="Documentary">
+                        </div>
+                        <div class="genre" data-genre-id="18">
+                            Drama
+                            <img src="./icons/drama.svg" alt="Drama">
+                        </div>
+                        <div class="genre" data-genre-id="10751">
+                            Family
+                            <img src="./icons/family.png" alt="Family">
+                        </div>
+                        <div class="genre" data-genre-id="14">
+                            Fantasy
+                            <img src="./icons/fantasy.svg" alt="Fantasy">
+                        </div>
+                        <div class="genre" data-genre-id="36">
+                            History
+                            <img src="./icons/history.png" alt="History">
+                        </div>
+                        <div class="genre" data-genre-id="27">
+                            Horror
+                            <img src="./icons/horror.svg" alt="Horror">
+                        </div>
+                        <div class="genre" data-genre-id="10402">
+                            Music
+                            <img src="./icons/music.svg" alt="Music">
+                        </div>
+                        <div class="genre" data-genre-id="9648">
+                            Mystery
+                            <img src="./icons/mystery.svg" alt="Mystery">
+                        </div>
+                        <div class="genre" data-genre-id="10749">
+                            Romance
+                            <img src="./icons/romance.svg" alt="Romance">
+                        </div>
+                        <div class="genre" data-genre-id="878">
+                            Science Fiction
+                            <img src="./icons/fiction.png" alt="Science Fiction">
+                        </div>
+                        <div class="genre" data-genre-id="10770">
+                            TV Movie
+                            <img src="./icons/tv-movie.svg" alt="TV Movie">
+                        </div>
+                        <div class="genre" data-genre-id="53">
+                            Thriller
+                            <img src="./icons/thriller.svg" alt="Thriller">
+                        </div>
+                        <div class="genre" data-genre-id="10752">
+                            War
+                            <img src="./icons/war2.svg" alt="War">
+                        </div>
+                        <div class="genre" data-genre-id="37">
+                            Western
+                            <img src="./icons/western.png" alt="Western">
+                        </div>
+                        <!-- genres end -->
+                    </div>     
+                </nav>
+            </div>
         </header>
         <!-- header end -->
     
+        <div class="overlay"></div>
+
         <main class="main">
-            <div class="movie"></div>
+            <div class="movie animate__animated animate__bounceInDown"></div>
+            <div class="movie-page"></div>
             <div id="pagination-container"></div>
         </main>
         <!-- main end -->
 
-        <nav class="navigation">
-            <div class="genre" data-genre-id="28">
-                Action
-                <img src="./icons/action.svg" alt="Action">
-            </div>
-            <div class="genre" data-genre-id="12">
-                Adventure
-                <img src="./icons/adventure.png" alt="Adventure">
-            </div>
-            <div class="genre" data-genre-id="16">
-                Animation
-                <img src="./icons/animation.svg" alt="Animation">
-            </div>
-            <div class="genre" data-genre-id="35">
-                Comedy
-                <img src="./icons/comedy.png" alt="Comedy">
-            </div>
-            <div class="genre" data-genre-id="80">
-                Crime
-                <img src="./icons/crime.png" alt="Crime">
-            </div>
-            <div class="genre" data-genre-id="99">
-                Documentary
-                <img src="./icons/documentary.png" alt="Documentary">
-            </div>
-            <div class="genre" data-genre-id="18">
-                Drama
-                <img src="./icons/drama.svg" alt="Drama">
-            </div>
-            <div class="genre" data-genre-id="10751">
-                Family
-                <img src="./icons/family.png" alt="Family">
-            </div>
-            <div class="genre" data-genre-id="14">
-                Fantasy
-                <img src="./icons/fantasy.svg" alt="Fantasy">
-            </div>
-            <div class="genre" data-genre-id="36">
-                History
-                <img src="./icons/history.png" alt="History">
-            </div>
-            <div class="genre" data-genre-id="27">
-                Horror
-                <img src="./icons/horror.svg" alt="Horror">
-            </div>
-            <div class="genre" data-genre-id="10402">
-                Music
-                <img src="./icons/music.svg" alt="Music">
-            </div>
-            <div class="genre" data-genre-id="9648">
-                Mystery
-                <img src="./icons/mystery.svg" alt="Mystery">
-            </div>
-            <div class="genre" data-genre-id="10749">
-                Romance
-                <img src="./icons/romance.svg" alt="Romance">
-            </div>
-            <div class="genre" data-genre-id="878">
-                Science Fiction
-                <img src="./icons/fiction.png" alt="Science Fiction">
-            </div>
-            <div class="genre" data-genre-id="10770">
-                TV Movie
-                <img src="./icons/tv-movie.svg" alt="TV Movie">
-            </div>
-            <div class="genre" data-genre-id="53">
-                Thriller
-                <img src="./icons/thriller.svg" alt="Thriller">
-            </div>
-            <div class="genre" data-genre-id="10752">
-                War
-                <img src="./icons/war2.svg" alt="War">
-            </div>
-            <div class="genre" data-genre-id="37">
-                Western
-                <img src="./icons/western.png" alt="Western">
-            </div>
+        <nav class="navigation animate__animated animate__bounceInLeft">
+            <div class="filters1"></div>
+            <div class="genres">
+                <div class="genre" data-genre-id="28">
+                    Action
+                    <img src="./icons/action.svg" alt="Action">
+                </div>
+                <div class="genre" data-genre-id="12">
+                    Adventure
+                    <img src="./icons/adventure.png" alt="Adventure">
+                </div>
+                <div class="genre" data-genre-id="16">
+                    Animation
+                    <img src="./icons/animation.svg" alt="Animation">
+                </div>
+                <div class="genre" data-genre-id="35">
+                    Comedy
+                    <img src="./icons/comedy.png" alt="Comedy">
+                </div>
+                <div class="genre" data-genre-id="80">
+                    Crime
+                    <img src="./icons/crime.png" alt="Crime">
+                </div>
+                <div class="genre" data-genre-id="99">
+                    Documentary
+                    <img src="./icons/documentary.png" alt="Documentary">
+                </div>
+                <div class="genre" data-genre-id="18">
+                    Drama
+                    <img src="./icons/drama.svg" alt="Drama">
+                </div>
+                <div class="genre" data-genre-id="10751">
+                    Family
+                    <img src="./icons/family.png" alt="Family">
+                </div>
+                <div class="genre" data-genre-id="14">
+                    Fantasy
+                    <img src="./icons/fantasy.svg" alt="Fantasy">
+                </div>
+                <div class="genre" data-genre-id="36">
+                    History
+                    <img src="./icons/history.png" alt="History">
+                </div>
+                <div class="genre" data-genre-id="27">
+                    Horror
+                    <img src="./icons/horror.svg" alt="Horror">
+                </div>
+                <div class="genre" data-genre-id="10402">
+                    Music
+                    <img src="./icons/music.svg" alt="Music">
+                </div>
+                <div class="genre" data-genre-id="9648">
+                    Mystery
+                    <img src="./icons/mystery.svg" alt="Mystery">
+                </div>
+                <div class="genre" data-genre-id="10749">
+                    Romance
+                    <img src="./icons/romance.svg" alt="Romance">
+                </div>
+                <div class="genre" data-genre-id="878">
+                    Science Fiction
+                    <img src="./icons/fiction.png" alt="Science Fiction">
+                </div>
+                <div class="genre" data-genre-id="10770">
+                    TV Movie
+                    <img src="./icons/tv-movie.svg" alt="TV Movie">
+                </div>
+                <div class="genre" data-genre-id="53">
+                    Thriller
+                    <img src="./icons/thriller.svg" alt="Thriller">
+                </div>
+                <div class="genre" data-genre-id="10752">
+                    War
+                    <img src="./icons/war2.svg" alt="War">
+                </div>
+                <div class="genre" data-genre-id="37">
+                    Western
+                    <img src="./icons/western.png" alt="Western">
+                </div>
+                <!-- genres end -->
+            </div>     
         </nav>
         <!-- nav end -->
-
-        <aside class="aside">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-        </aside>
-        <!-- aside end -->
+        
+        
+        <!-- footer end -->
     </div>
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
     <script src="script.js" defer></script>
 </body>
 </html>
